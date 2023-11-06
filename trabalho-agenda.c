@@ -205,6 +205,12 @@ void escolherOperacao(){
 
 
 void main(){
+    for (int i = 0; i < 99; i++){
+            Contato contatoSelec = Contatos[i];
+            contatoSelec.cdCadastro = 0;
+            contatoSelec.telefone = 0;
+            contatoSelec.tipoContato = 0;
+    }
     printf("----------------------------------\n");
     printf("\nSeja bem vindo a agenda de contatos\n");
     printf("\nDesenvolvido por Matheus Luiz Garcia\n");
