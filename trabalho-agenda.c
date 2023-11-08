@@ -17,37 +17,37 @@ typedef struct {
     TipoContato tipoContato;
 } Contato;
 
-Contato Contatos[99];
+Contato Contatos[100];
 int operacao = 0;
+
+int GetIndexDisponivel(){
+    for(int i = 0; i <= 99; i++){
+        if(Contatos[i].cdCadastro == 0){
+            return i;
+        }
+    }
+    return -1;
+}
 
 void cadastroContato(){
     int cont = 0;
     while(cont == 0){
-        int listaCheia = 1;
-        int indexDisponivel = 0;
-        while(listaCheia == 1){
-            for(int i = 0; i < 99; i++){
-                if(Contatos[i].cdCadastro == 0){
-                    listaCheia = 0;
-                    indexDisponivel = i;
-                }
-            }
-        }
-        if(listaCheia == 1){
+        int indexDisponivel = GetIndexDisponivel();
+        if(indexDisponivel < 0){
             printf("\nLista de contatos está cheia, exclua um contato ou reinicie o programa!:\n");
         }
-        else{            
+        else{
+            Contatos[indexDisponivel].cdCadastro = indexDisponivel + 1;
             printf("----------------------------------\n");
             printf("\nCadastro de contato:\n");
             printf("\nInsira o nome para o contato:\n");
-            scanf("%s",Contatos[indexDisponivel].nome);
+            scanf("%s",&Contatos[indexDisponivel].nome);
             printf("\nInsira o numero para o contato:\n");
             scanf("%ld",&Contatos[indexDisponivel].telefone);
             printf("\nInforme o tipo de contato:\n");
             printf("1 - Pessoal\n");
             printf("2 - Trabalho\n");
             scanf("%u",&Contatos[indexDisponivel].tipoContato);
-            Contatos[indexDisponivel].cdCadastro = indexDisponivel + 1;
             printf("\nDeseja cadastrar outro contato?\n");
             printf("1 - Sim\n");
             printf("2 - Não\n");
@@ -67,14 +67,13 @@ void excluirContato(){
         printf("\nExcluir contato:\n");
         printf("\nDigite o código de contato para excluir:\n");
         scanf("%d", &indexExcluir);
-        if(indexExcluir < 1 || indexExcluir > 99){
+        if(indexExcluir < 1 || indexExcluir > 100){
             printf("\nInsira um código válido para excluir!\n");    
         }
         else{
-            Contato contatoSelec = Contatos[indexExcluir -1];
-            contatoSelec.cdCadastro = 0;
-            contatoSelec.telefone = 0;
-            contatoSelec.tipoContato = 0;
+            Contatos[indexExcluir -1].cdCadastro = 0;
+            Contatos[indexExcluir -1].telefone = 0;
+            Contatos[indexExcluir -1].tipoContato = 0;
             printf("\nDeseja Excluir outro contato?\n");
             printf("1 - Sim\n");
             printf("2 - Não\n");
@@ -204,16 +203,16 @@ void escolherOperacao(){
 }
 
 
-void main(){
-    for (int i = 0; i < 99; i++){
-            Contato contatoSelec = Contatos[i];
-            contatoSelec.cdCadastro = 0;
-            contatoSelec.telefone = 0;
-            contatoSelec.tipoContato = 0;
+int main(){
+    for (int i = 0; i <= 99; i++){
+            Contatos[i].cdCadastro = 0;
+            Contatos[i].telefone = 0;
+            Contatos[i].tipoContato = 0;
     }
     printf("----------------------------------\n");
     printf("\nSeja bem vindo a agenda de contatos\n");
     printf("\nDesenvolvido por Matheus Luiz Garcia\n");
     printf("----------------------------------\n");
     escolherOperacao();
+    return 0;
 }
