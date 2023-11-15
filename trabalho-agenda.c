@@ -113,18 +113,18 @@ void GetPage(int page){
     if (page < 9){
         printf("2 - Página seguinte\n");
     }
+    printf("3 - Sair\n");
 }
 
 void visualizarContatos(){
     int cont = 0;
     int page = 0;
     int opt = 0;
-    while(cont == 0){
-        printf("----------------------------------\n");
+    printf("----------------------------------\n");
         printf("\nLista de contatos:\n");
         printf("\nExibindo lista de contatos:\n");
         GetPage(page);
-        printf("3 - Sair\n");
+    while(cont == 0){
         scanf(" %d",&opt);
         switch (opt)
         {
@@ -168,8 +168,8 @@ void escolherOperacao(){
         printf("Selecione uma operação:\n\n");
         printf("1 - Cadastrar novo contato\n");
         printf("2 - Visualizar contatos\n");
-        printf("3 - Excluir contato:\n");
-        printf("4 - Sair do programa:\n");
+        printf("3 - Excluir contato\n");
+        printf("4 - Sair do programa\n");
         printf("----------------------------------\n");
         scanf("%d",&operacao);
         switch (operacao)
