@@ -155,6 +155,71 @@ void visualizarContatos(){
         }
     }
 }
+void buscarContato() {
+    int cont = 0;
+    int id = 0;
+    int opt = 0;
+    printf("----------------------------------\n");
+    printf("\nBusca de contato:\n");
+    while(cont == 0){
+            printf("\nInsira um código de contato entre 1 e 100 para buscar:\n");
+            scanf("%d", &id);
+        if (id < 1 || id > 100){
+            printf("\nInsira um ID válido, tente novamente!\n");
+        }
+        else{
+            Contato contatoBuscado = Contatos[id-1];
+            if (contatoBuscado.cdCadastro == 0){
+                printf("Contato com código %d não cadastrado ou não encontrado!\n", id);
+            }
+            else{
+                printf("Cód. Cadastro: %d\n", contatoBuscado.cdCadastro);
+                printf("Nome: %s \n", contatoBuscado.nome);
+                printf("Cód. Cadastro: %d\n", contatoBuscado.telefone);
+                if(contatoBuscado.tipoContato == 1){
+                    printf("Tipo de contato: Pessoal\n");
+                }
+                else{
+                    printf("Tipo de contato: Trabalho\n");
+                }
+            }
+            cont = 1;
+        }
+    }
+}
+
+void editarContato(){ 
+    int cont = 0;
+    int id = 0;
+    int opt = 0;
+    printf("----------------------------------\n");
+    printf("\nEditar contato:\n");
+    while(cont == 0){
+            printf("\nInsira um código de contato entre 1 e 100 para editar:\n");
+            scanf("%d", &id);
+        if (id < 1 || id > 100){
+            printf("\nInsira um ID válido, tente novamente!\n");
+        }
+        else{
+            Contatos[id-1].cdCadastro = id;
+            printf("\nInsira o nome para o contato:\n");
+            scanf("%s",&Contatos[id-1].nome);
+            printf("\nInsira o numero para o contato:\n");
+            scanf("%ld",&Contatos[id-1].telefone);
+            printf("\nInforme o tipo de contato:\n");
+            printf("1 - Pessoal\n");
+            printf("2 - Trabalho\n");
+            scanf("%u",&Contatos[id-1].tipoContato);
+            printf("\nDeseja editar outro contato?\n");
+            printf("1 - Sim\n");
+            printf("2 - Não\n");
+            scanf("%d",&cont);
+            if(cont == 1){
+                cont = 0;
+            }
+        }
+    }
+}
 
 void sair(){
     printf("\nObrigado por utilizar a agenda de contatos!\n");
@@ -169,7 +234,9 @@ void escolherOperacao(){
         printf("1 - Cadastrar novo contato\n");
         printf("2 - Visualizar contatos\n");
         printf("3 - Excluir contato\n");
-        printf("4 - Sair do programa\n");
+        printf("4 - Buscar contato por ID\n");
+        printf("5 - Editar contato\n");
+        printf("6 - Sair do programa\n");
         printf("----------------------------------\n");
         scanf("%d",&operacao);
         switch (operacao)
@@ -184,6 +251,12 @@ void escolherOperacao(){
             excluirContato();
             break;
         case 4:
+            buscarContato();
+            break;
+        case 5:
+            editarContato();
+            break;
+        case 6:
             sair();
             return;
             break;
